@@ -264,11 +264,15 @@ if (form) {
       if (!el.value.trim()) { showError(el, msg); valid = false; }
     });
 
-    // Phone validation
+    // Phone validation: must contain 7-15 digits (spaces, dashes, parens, + allowed)
     const phoneEl = document.getElementById('res-phone');
-    if (phoneEl && phoneEl.value.trim() && !/^[\d\s\-()+]{7,15}$/.test(phoneEl.value.trim())) {
-      showError(phoneEl, 'Ingresa un número de teléfono válido.');
-      valid = false;
+    if (phoneEl && phoneEl.value.trim()) {
+      const digits = phoneEl.value.replace(/\D/g, '');
+      const allowed = /^[0-9\s\-()+]+$/.test(phoneEl.value.trim());
+      if (!allowed || digits.length < 7 || digits.length > 15) {
+        showError(phoneEl, 'Ingresa un número de teléfono válido (7–15 dígitos).');
+        valid = false;
+      }
     }
 
     // Email validation (optional field)
