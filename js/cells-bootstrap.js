@@ -1,11 +1,11 @@
 const statusEl = document.getElementById('opencellsStatus');
 
-function setOpenCellsStatus(enabled, label) {
+function setOpenCellsStatus(isEnabled, label) {
   if (!statusEl) return;
   statusEl.textContent = label;
-  statusEl.classList.toggle('is-enabled', enabled);
-  statusEl.classList.toggle('is-disabled', !enabled);
-  document.documentElement.dataset.opencells = enabled ? 'enabled' : 'disabled';
+  statusEl.classList.toggle('is-enabled', isEnabled);
+  statusEl.classList.toggle('is-disabled', !isEnabled);
+  document.documentElement.dataset.opencells = isEnabled ? 'enabled' : 'disabled';
 }
 
 async function initOpenCells() {
