@@ -955,6 +955,31 @@ footer {
 #backToTop.visible { opacity: 1; transform: translateY(0); }
 #backToTop:hover { background: var(--primary); transform: translateY(-4px); }
 
+.opencells-status {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 998;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--white);
+  background: rgba(11, 37, 53, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+}
+
+.opencells-status.is-enabled {
+  background: rgba(13, 126, 160, 0.92);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.opencells-status.is-disabled {
+  background: rgba(94, 94, 94, 0.9);
+}
+
 /* ===========================
    RESPONSIVE
 =========================== */
@@ -974,4 +999,5 @@ footer {
   .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .features-list { grid-template-columns: 1fr; }
   section { padding: 3.5rem 5%; }
+  .opencells-status { bottom: 5.5rem; font-size: 0.68rem; }
 }
