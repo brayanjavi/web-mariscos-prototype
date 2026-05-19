@@ -10,12 +10,11 @@ function setOpenCellsStatus(enabled, label) {
 
 async function initOpenCells() {
   try {
-    const module = await import('https://esm.sh/@open-cells/core');
-    if (module) {
-      setOpenCellsStatus(true, 'OpenCells · activo');
-      return;
-    }
-  } catch (_) {
+    await import('https://esm.sh/@open-cells/core');
+    setOpenCellsStatus(true, 'OpenCells · activo');
+    return;
+  } catch (error) {
+    console.warn('OpenCells could not be loaded:', error);
     // Graceful fallback keeps current site behavior untouched.
   }
 
