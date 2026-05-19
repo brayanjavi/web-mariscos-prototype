@@ -19,4 +19,8 @@ async function initOpenCells() {
   }
 }
 
-initOpenCells();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initOpenCells, { once: true });
+} else {
+  initOpenCells();
+}
