@@ -12,7 +12,6 @@ async function initOpenCells() {
   try {
     await import('https://esm.sh/@open-cells/core');
     setOpenCellsStatus(true, 'OpenCells · activo');
-    return;
   } catch (error) {
     console.warn('OpenCells could not be loaded:', error);
     // Graceful fallback keeps current site behavior untouched.
