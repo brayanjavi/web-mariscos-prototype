@@ -15,9 +15,8 @@ async function initOpenCells() {
   } catch (error) {
     console.warn('OpenCells could not be loaded:', error);
     // Graceful fallback keeps current site behavior untouched.
+    setOpenCellsStatus(false, 'OpenCells · no disponible');
   }
-
-  setOpenCellsStatus(false, 'OpenCells · no disponible');
 }
 
 initOpenCells();
