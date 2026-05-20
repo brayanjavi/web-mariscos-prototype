@@ -666,9 +666,11 @@
   <div id="opencellsStatus" class="opencells-status" role="status" aria-live="polite">OpenCells · cargando…</div>
 
   <!-- EmailJS SDK (envío de correos desde el navegador) -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+          integrity="sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb"
+          crossorigin="anonymous"></script>
 
-  <!-- Servicio de reservaciones -->
+  <!-- Servicio de reservaciones (expone sendReservationEmails al scope global) -->
   <script src="js/reservation-service.js"></script>
 
   <!-- Scripts -->

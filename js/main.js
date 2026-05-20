@@ -301,6 +301,7 @@ if (form) {
     submitBtn.innerHTML = '<span aria-hidden="true">⏳</span> Enviando…';
 
     // Send reservation emails (non-fatal — prototype may be unconfigured)
+    // sendReservationEmails is provided by js/reservation-service.js loaded via script tag
     try {
       await sendReservationEmails({
         name, phone, email,
@@ -317,13 +318,15 @@ if (form) {
     // Fill success details
     const sd = document.getElementById('success-details');
     if (sd) {
+      // escapeHtml prevents XSS from user-supplied form values
+      const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
       sd.innerHTML = `
-        <p>👤 <strong>Nombre:</strong> ${name}</p>
-        <p>📅 <strong>Fecha:</strong> ${formatDate(date)}</p>
-        <p>🕐 <strong>Hora:</strong> ${time}</p>
-        <p>👥 <strong>Personas:</strong> ${guests}</p>
-        ${zone  ? `<p>🪑 <strong>Zona:</strong> ${zone}</p>` : ''}
-        ${email ? `<p>📧 <strong>Confirmación enviada a:</strong> ${email}</p>` : ''}
+        <p>👤 <strong>Nombre:</strong> ${esc(name)}</p>
+        <p>📅 <strong>Fecha:</strong> ${esc(formatDate(date))}</p>
+        <p>🕐 <strong>Hora:</strong> ${esc(time)}</p>
+        <p>👥 <strong>Personas:</strong> ${esc(guests)}</p>
+        ${zone  ? `<p>🪑 <strong>Zona:</strong> ${esc(zone)}</p>` : ''}
+        ${email ? `<p>📧 <strong>Confirmación enviada a:</strong> ${esc(email)}</p>` : ''}
       `;
     }
 
