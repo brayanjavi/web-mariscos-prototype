@@ -246,7 +246,7 @@ if (form) {
     field.addEventListener('change', () => clearError(field));
   });
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     let valid = true;
 
@@ -284,13 +284,37 @@ if (form) {
 
     if (!valid) return;
 
-    // Fill success details
+    // Collect form values
     const name   = document.getElementById('res-name').value.trim();
+    const phone  = phoneEl ? phoneEl.value.trim() : '';
+    const email  = emailEl ? emailEl.value.trim() : '';
     const date   = document.getElementById('res-date').value;
     const time   = document.getElementById('res-time').value;
     const guests = document.getElementById('res-guests').value;
     const zone   = document.getElementById('res-zone')?.value || '';
+    const notes  = document.getElementById('res-notes')?.value.trim() || '';
 
+    // Loading state
+    const submitBtn = form.querySelector('.submit-btn');
+    const originalBtnHTML = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span aria-hidden="true">⏳</span> Enviando…';
+
+    // Send reservation emails (non-fatal — prototype may be unconfigured)
+    try {
+      await sendReservationEmails({
+        name, phone, email,
+        date: formatDate(date), time, guests, zone, notes,
+      });
+    } catch (err) {
+      console.warn('No se pudieron enviar los correos de reservación:', err);
+    }
+
+    // Restore button
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnHTML;
+
+    // Fill success details
     const sd = document.getElementById('success-details');
     if (sd) {
       sd.innerHTML = `
@@ -298,7 +322,8 @@ if (form) {
         <p>📅 <strong>Fecha:</strong> ${formatDate(date)}</p>
         <p>🕐 <strong>Hora:</strong> ${time}</p>
         <p>👥 <strong>Personas:</strong> ${guests}</p>
-        ${zone ? `<p>🪑 <strong>Zona:</strong> ${zone}</p>` : ''}
+        ${zone  ? `<p>🪑 <strong>Zona:</strong> ${zone}</p>` : ''}
+        ${email ? `<p>📧 <strong>Confirmación enviada a:</strong> ${email}</p>` : ''}
       `;
     }
 
