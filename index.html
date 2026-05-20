@@ -501,7 +501,7 @@
           </div>
 
           <div class="form-group">
-            <label for="res-email">📧 Correo electrónico (opcional)</label>
+            <label for="res-email">📧 Correo electrónico <span class="label-hint">(recibirás tu confirmación aquí)</span></label>
             <input type="email" id="res-email" name="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" />
             <span class="field-error" role="alert"></span>
           </div>
@@ -664,6 +664,14 @@
   <!-- Back to top -->
   <button id="backToTop" aria-label="Volver arriba" title="Volver al inicio">↑</button>
   <div id="opencellsStatus" class="opencells-status" role="status" aria-live="polite">OpenCells · cargando…</div>
+
+  <!-- EmailJS SDK (envío de correos desde el navegador) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+          integrity="sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb"
+          crossorigin="anonymous"></script>
+
+  <!-- Servicio de reservaciones (expone sendReservationEmails al scope global) -->
+  <script src="js/reservation-service.js"></script>
 
   <!-- Scripts -->
   <script type="module" src="js/cells-bootstrap.js"></script>
