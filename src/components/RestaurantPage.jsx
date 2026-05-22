@@ -16,12 +16,12 @@ const stats = [
 ];
 
 const features = [
-  '🐟 Mariscos frescos diarios',
-  '👨‍🍳 Chef experto certificado',
-  '🌿 Ingredientes orgánicos',
-  '🏆 Premio Mejor Restaurante',
-  '🍷 Carta de vinos selecta',
-  '🎶 Música en vivo',
+  { icon: '🐟', label: 'Mariscos frescos diarios' },
+  { icon: '👨‍🍳', label: 'Chef experto certificado' },
+  { icon: '🌿', label: 'Ingredientes orgánicos' },
+  { icon: '🏆', label: 'Premio Mejor Restaurante' },
+  { icon: '🍷', label: 'Carta de vinos selecta' },
+  { icon: '🎶', label: 'Música en vivo' },
 ];
 
 const filters = [
@@ -614,9 +614,9 @@ export default function RestaurantPage() {
 
             <ul className="features-list" aria-label="Características del restaurante">
               {features.map((feature) => (
-                <li key={feature}>
-                  <span className="feat-icon" aria-hidden="true">{feature.slice(0, 2)}</span>
-                  {feature.slice(3)}
+                <li key={feature.label}>
+                  <span className="feat-icon" aria-hidden="true">{feature.icon}</span>
+                  {feature.label}
                 </li>
               ))}
             </ul>
